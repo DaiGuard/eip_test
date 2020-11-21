@@ -1,0 +1,401 @@
+$ EZ-EDS Version 3.23.1.20171205 Generated Electronic Data Sheet
+
+[File]
+        DescText = "SICK FlexiSoft EtherNet/IP Module";
+        CreateDate = 05-23-2011;
+        CreateTime = 13:44:49;
+        ModDate = 09-21-2016;
+        ModTime = 10:38:34;
+        Revision = 3.01;
+        HomeURL = "www.sick.com";
+
+[Device]
+        VendCode = 808;
+        VendName = "SICK AG";
+        ProdType = 43;
+        ProdTypeStr = "Generic Device";
+        ProdCode = 10528;
+        MajRev = 3;
+        MinRev = 4;
+        ProdName = "FX0-GENT";
+        Catalog = "Flexi";
+        Icon = "Station_GENT.ico";
+        IconContents =
+                "AAABAAMAMDAQAAEABABoBgAANgAAACAgEAABAAQA6AIAAJ4GAAAQEBAAAQAE"
+                "ACgBAACGCQAAKAAAADAAAABgAAAAAQAEAAAAAAAAAAAAAAAAAAAAAAAQAAAA"
+                "AAAAAAAAAACAAAAAAIAAAICAAAAAAIAAgACAAACAgACAgIAAwMDAAP8AAAAA"
+                "/wAA//8AAAAA/wD/AP8AAP//AP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "AAAAAAAHd3d3CHd3d3BoCAgIBoCAgIAAAAAAAAAHd3d3CP////BvDw8PBvDw"
+                "8PAAAAAAAAAAAAAACP////BgAAAABgAAAAAAAAAAAAAGZmZmCIiIiIBmZmZm"
+                "BmZmZmAAAAAAAAAHd3d3CIiIiIBoCAgIBoCAgIAAAAAAAAAHd3d3CIiIiIBv"
+                "Dw8PBvDw8PAAAAAAAAAAAAAACHd3d3BgAAAABgAAAAAAAAAAAAAO7u7uCP//"
+                "//Bu7u7uBu7u7uAAAAAAAAAO7u7uCP////Bu7u7uBu7u7uAAAAAAAAAO7u7u"
+                "CP/4//Bm5ubmBm5ubmAAAAAAAAAO7u7uCP////Bm5ubmBm5ubmAAAAAAAAAO"
+                "7u7uCP////Bu7u7uBu7u7uAAAAAAAAAO7u7uCPiIj/Bm5ubmBm5ubmAAAAAA"
+                "AAAO7mZuCP////Bm5ubmBm5ubmAAAAAAAAAO5m7uCPiP//Bu7u7uBu7u7uAA"
+                "AAAAAAAOZmZuCP//+IBu7u7uBu7u7uAAAAAAAAAO7u7uCP///4Bu7u7uBu7u"
+                "7uAAAAAAAAAO7u7mCP///4Bu7u7uBu7u7uAAAAAAAAAO5m7mCP/4+IBu7u7u"
+                "Bu7u7uAAAAAAAAAO5m7uCP////Bu7u7uBu7u7uAAAAAAAAAO7u7uCP////Bu"
+                "7u7uBu7u7uAAAAAAAAAO7u7mCP///4Bu7u7uBu7u7uAAAAAAAAAO7u7mCP//"
+                "/4Bu7u7uBu7u7uAAAAAAAAAOZmbmCPMzP4BmZmbmBmZmbmAAAAAAAAAO7u7u"
+                "CP////Bm5ubmBm5ubmAAAAAAAAAO7u7uCP////Bu7u7uBu7u7uAAAAAAAAAO"
+                "7u7uCP////Bm5ubmBm5ubmAAAAAAAAAO7u7uCP+I//Bm5ubmBm5ubmAAAAAA"
+                "AAAO5mbuCP////Bu7u7uBu7u7uAAAAAAAAAO7u7uCP////Bu7u7uBu7u7uAA"
+                "AAAAAAAHd3d3CHd3d3BgAAAABgAAAAAAAAAAAAAHd3d3CIiIiIBvDw8PBvDw"
+                "8PAAAAAAAAAHd3d3CIiIiIBoCAgIBoCAgIAAAAAAAAAGZmZmCIiIiIBmZmZm"
+                "BmZmZmAAAAAAAAAAAAAACP////BgAAAABgAAAAAAAAAAAAAAAAAACP////Bv"
+                "Dw8PBvDw8PAAAAAAAAAAAAAACHd3d3BoCAgIBoCAgIAAAAAAAAAAAAAACIiI"
+                "iIBmZmZmZmZmZmYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgA"
+                "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "Dw8AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "AAAAAAD8AAAAAD9fbfwAAAAAP/wA/AAAAAA//AD8AAAAAD/8APwAAAAAP/wA"
+                "/AAAAAA//AD8AAAAAD/8APwAAAAAP/wA/AAAAAA//AD8AAAAAD/8APwAAAAA"
+                "P/wA/AAAAAA//AD8AAAAAD/8APwAAAAAP/wA/AAAAAA//AD8AAAAAD/8APwA"
+                "AAAAP/wA/AAAAAA//AD8AAAAAD/8APwAAAAAP/wA/AAAAAA//AD8AAAAAD/8"
+                "APwAAAAAP/wA/AAAAAA//AD8AAAAAD/8APwAAAAAP/wA/AAAAAA//AD8AAAA"
+                "AD/8APwAAAAAP/wA/AAAAAA//AD8AAAAAD/8APwAAAAAP/wA/AAAAAA//AD8"
+                "AAAAAD/8APwAAAAAP/wA/AAAAAA//AD8AAAAAD/8APwAAAAAP/wA/AAAAAA/"
+                "/AD+A//////8AP4D//////4D/gP//////gP+A//////+A/4D//////4D/gP/"
+                "/////gP+A//////+A/+P//////4D/////////48oAAAAIAAAAEAAAAABAAQA"
+                "AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAIAAAAAAgAAAgIAAAAAAgACA"
+                "AIAAAICAAICAgADAwMAA/wAAAAD/AAD//wAAAAD/AP8A/wAA//8A////AAAA"
+                "AAAAAAAAAAAAAAAAAAAAB3d3CHd3cG8PDwbw8PAAAAAAAAj///BnBwcGcHBw"
+                "AAAHd3cI///wZmZmBmZmYAAAB3d3CIiIgG8PDwbw8PAAAAAAAAh3d3BnBwcG"
+                "cHBwAAAO7u4I///wbu7uBu7u4AAADu7uCP+P8Gbm5gZubmAAAA7u7gj///Bu"
+                "7u4G7u7gAAAO7m4I+IjwZubmBm5uYAAADubuCPj/8G7u7gbu7uAAAA5mbgj/"
+                "+IBu7u4G7u7gAAAO7uYI//+Abu7uBu7u4AAADubuCPj4gG7u7gbu7uAAAA7u"
+                "7gj///Bu7u4G7u7gAAAO7u4I//+Abu7uBu7u4AAADu7uCP//gG7u7gbu7uAA"
+                "AA5mZgjzM4BmZmYGZmZgAAAO7uYI///wbu7uBu7u4AAADu7uCP+P8Gbm5gZu"
+                "bmAAAA7mbgj///Bu7u4G7u7gAAAHd3cId3dwZwcHBnBwcAAAB3d3CIiIgG8P"
+                "Dwbw8PAAAAZmZgj///BmZmYGZmZgAAAAAAAI///wZwcHBnBwcAAAAAAACHd3"
+                "cG8PDwbw8PAAAAAAAAiIiIBmZmZmZmZmAAAAcHAAAAAAAAAAAAAAAAAAAAAA"
+                "AAAAAAAAAAAAAAAAAADw8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "AAAAAAAAAAAAAAAAAAAAwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AA"
+                "AAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAADwAAA"
+                "A8AAAAPAAAADwAAAA8AAAAPAAAADwAAAA8AAAAPAAAAD4P///+D////g////"
+                "4P///+D///8oAAAAEAAAACAAAAABAAQAAAAAAAAAAAAAAAAAAAAAABAAAAAA"
+                "AAAAAAAAAIAAAAAAgAAAgIAAAAAAgACAAIAAAICAAICAgADAwMAA/wAAAAD/"
+                "AAD//wAAAAD/AP8A/wAA//8A////AAAAAAAAAAAAAGd4/2/2/wAAYAh3ZmZm"
+                "AABu6P9u5u4AAG7o/2ZmZgAAbuiIbubuAABm6P9u5u4AAGbo/27m7gAAZmj4"
+                "ZmZmAABu6P9u5u4AAG5o/25m5gAAZmh3ZmZmAABmaP9v9v8AAHAHZmZmZgAA"
+                "cAcAAAAAAABwBwAAAAAAwAFfcsABwAHAAcABwAHAAcABwAHAAcABwAHAAcAB"
+                "wAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHD/8ABw//D/w==";
+
+[Device Classification]
+        Class1 = EtherNetIP;
+
+
+
+[ParamClass]
+        Object_Name = "Parameter Object";
+        Object_Class_Code = 0x0F;
+
+
+        MaxInst = 11;                   $ total number of configuration parameters
+        Descriptor = 0x0000;            $ all full attributes are supported and stored in non-volatile storage
+        CfgAssembly = 0;
+
+[Params]
+
+        Param1 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0802,                 $ Descriptor
+                0xC7,                   $ Data Type
+                2,                      $ Data Size in bytes
+                "Output size  (Exclusive Owner)",    $ name
+                "Bytes",                $ units
+                "variable output data size",    $ help string
+                0,50,50,                $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                0;                      $ decimal places
+        Enum1 =
+                0,"NoOutputData",
+                10,"One OutSet (10 Bytes)",
+                20,"Two OutSets (20 Bytes)",    $ 20 bytes of output data not possible for output assembliy 9
+                30,"Three OutSets (30 Bytes)",    $ 30 bytes of output data are only possible for output assemblies 5, 6 and 7
+                40,"Four OutSets (40 Bytes)",    $ 40 bytes of output data are only possible for output assemblies 5 and 6
+                50,"Five OutSets (50 Bytes)";    $ 50 bytes of output data are only possible for output assembly 5
+
+        Param2 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0800,                 $ Descriptor
+                0xC7,                   $ Data Type
+                2,                      $ Data Size in bytes
+                "Input size",           $ name
+                "Bytes",                $ units
+                "variable input data size",    $ help string
+                0,202,202,              $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                0;                      $ decimal places
+
+        Param3 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC6,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "Cons Assembly O->T",   $ name
+                "",                     $ units
+                "",                     $ help string
+                5,9,5,                  $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum3 =
+                5,"OutSet_1-5",
+                6,"OutSet_2-5",
+                7,"OutSet_3-5",
+                8,"OutSet_4-5",
+                9,"OutSet_5";
+        Param4 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC6,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "Prod Assembly T->O",   $ name
+                "",                     $ units
+                "",                     $ help string
+                1,4,1,                  $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+        Enum4 =
+                1,"InSet_1-4",
+                2,"InSet_2-4",
+                3,"InSet_3-4",
+                4,"InSet_4";
+        Param5 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC6,                   $ Data Type
+                1,                      $ Data Size in bytes
+                "Config Assembly",      $ name
+                "",                     $ units
+                "",                     $ help string
+                20,20,20,               $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                ;                       $ decimal places
+
+        Param10 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC8,                   $ Data Type
+                4,                      $ Data Size in bytes
+                "RPI Time (O->T)",      $ name
+                "Microseconds",         $ units
+                "Transmission interval Scanner -> Flexi Soft Gateway",    $ help string
+                4000,3200000,40000,     $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                0;
+
+        Param11 =
+                0,                      $ reserved, shall equal 0
+                ,,                      $ Link Path Size, Link Path
+                0x0000,                 $ Descriptor
+                0xC8,                   $ Data Type
+                4,                      $ Data Size in bytes
+                "RPI Time (T->O)",      $ name
+                "Microseconds",         $ units
+                "Transmission interval Flexi Soft Gateway -> Scanner ",    $ help string
+                4000,3200000,40000,     $ min, max, default data values
+                ,,,,                    $ mult, div, base, offset scaling
+                ,,,,                    $ mult, div, base, offset links
+                0;
+
+
+[Groups]
+        Group1 =
+                "Data size",
+                2,
+                1,2;
+
+        Group2 =
+                "Assembly-Instances",
+                2,
+                3,4;
+
+                                        $ Group3 =
+                                        $ "RPI time",
+                                        $ 2,
+                                        $ 10,11;
+
+
+[Assembly]
+        Revision = 2;
+        Object_Name = "Assembly Object";
+        Object_Class_Code = 0x04;
+        MaxInst = 9;
+        Number_Of_Static_Instances = 9;
+        Max_Number_Of_Dynamic_Instances = 0;
+        Assem1 =
+                $ Depending on connection size, can contain part or all of input data sets 1 through 4.
+                "InSets 1-4",
+                "20 04 24 Param4 30 03",
+                $ Includes input data sets 1 to 4, depending on connection data
+                $ size. Valid connection size = 1 to 202 bytes.
+                202,
+                0x0B01,
+                ,,
+                1616,;
+        Assem5 =
+                $ Can write to outputs data sets 1-5 starting with 1.
+                "OutSet 1-5",
+                "20 04 24 Param3 30 03",
+                $ Length must be multiple of 10, depending on number of output data sets written.
+                50,
+                0x0901,
+                ,,
+                400,;
+        Assem10 =
+                "ConfigAssembly",
+                ,
+                0,
+                0x0000,
+                ,,
+                0,;
+
+[Connection Manager]
+        Revision = 1;
+        Object_Name = "Connection Manager Object";
+        Object_Class_Code = 0x06;
+        MaxInst = 1;
+        Number_Of_Static_Instances = 1;
+        Max_Number_Of_Dynamic_Instances = 0;
+
+
+        Connection1 =
+                0x04010002,             $ 0-15    = supported transport classes
+                                        $ 16      = trigger: cyclic
+                                        $ 17      = trigger: change of state
+                                        $ 18      = trigger: application
+                                        $ 19-23   = trigger: reserved
+                                        $ 24      = application type: listen-only
+                                        $ 25      = application type: input-only
+                                        $ 26      = application type: exclusive-owner
+                                        $ 27      = application type: redundant-owner
+                                        $ 28-30   = reserved
+                                        $ 31      = Direction: Client = 0 / Server = 1
+                0x44640405,             $ 0       = O->T fixed size supported
+                                        $ 1       = O->T variable size supported
+                                        $ 2       = T->O fixed size supported
+                                        $ 3       = T->O variable size supported
+                                        $ 4-5     = O->T number of bytes per slot (obsolete)
+                                        $ 6-7     = T->O number of bytes per slot (obsolete)
+                                        $ 8-10    = O->T Real time transfer format
+                                        $ 11      = reserved
+                                        $ 12-14   = T->O Real time transfer format
+                                        $ 15      = reserved
+                                        $ 16      = O->T connection type: NULL
+                                        $ 17      = O->T connection type: MULTICAST
+                                        $ 18      = O->T connection type: POINT2POINT
+                                        $ 19      = O->T connection type: reserved
+                                        $ 20      = T->O connection type: NULL
+                                        $ 21      = T->O connection type: MULTICAST
+                                        $ 22      = T->O connection type: POINT2POINT
+                                        $ 23      = T->O connection type: reserved
+                                        $ 24      = O->T priority: LOW
+                                        $ 25      = O->T priority: HIGH
+                                        $ 26      = O->T priority: SCHEDULED
+                                        $ 27      = O->T priority: reserved
+                                        $ 28      = T->O priority: LOW
+                                        $ 29      = T->O priority: HIGH
+                                        $ 30      = T->O priority: SCHEDULED
+                                        $ 31      = T->O priority: reserved
+                Param10,Param1,Assem5,  $ O->T RPI
+                                        $ size, format
+                Param11,Param2,Assem1,  $ T->O RPI
+                                        $ size, format
+                ,,                      $ proxy config size, format
+                0,Assem10,              $ target config size, format
+                "Bidirectional exclusive owner",    $ Connection Name
+                "",                     $ help string
+                "20 04 24 0A 2C [Param3] 2C [Param4]";    $ Path
+
+
+        Connection2 =
+                0x02010002,             $ 0-15    = supported transport classes
+                                        $ 16      = trigger: cyclic
+                                        $ 17      = trigger: change of state
+                                        $ 18      = trigger: application
+                                        $ 19-23   = trigger: reserved
+                                        $ 24      = application type: listen-only
+                                        $ 25      = application type: input-only
+                                        $ 26      = application type: exclusive-owner
+                                        $ 27      = application type: redundant-owner
+                                        $ 28-30   = reserved
+                                        $ 31      = Direction: Client = 0 / Server = 1
+                0x44640305,             $ 0       = O->T fixed size supported
+                                        $ 1       = O->T variable size supported
+                                        $ 2       = T->O fixed size supported
+                                        $ 3       = T->O variable size supported
+                                        $ 4-5     = O->T number of bytes per slot (obsolete)
+                                        $ 6-7     = T->O number of bytes per slot (obsolete)
+                                        $ 8-10    = O->T Real time transfer format
+                                        $ 11      = reserved
+                                        $ 12-14   = T->O Real time transfer format
+                                        $ 15      = reserved
+                                        $ 16      = O->T connection type: NULL
+                                        $ 17      = O->T connection type: MULTICAST
+                                        $ 18      = O->T connection type: POINT2POINT
+                                        $ 19      = O->T connection type: reserved
+                                        $ 20      = T->O connection type: NULL
+                                        $ 21      = T->O connection type: MULTICAST
+                                        $ 22      = T->O connection type: POINT2POINT
+                                        $ 23      = T->O connection type: reserved
+                                        $ 24      = O->T priority: LOW
+                                        $ 25      = O->T priority: HIGH
+                                        $ 26      = O->T priority: SCHEDULED
+                                        $ 27      = O->T priority: reserved
+                                        $ 28      = T->O priority: LOW
+                                        $ 29      = T->O priority: HIGH
+                                        $ 30      = T->O priority: SCHEDULED
+                                        $ 31      = T->O priority: reserved
+                Param10,0,,             $ O->T RPI
+                                        $ size, format
+                Param11,Param2,Assem1,  $ T->O RPI
+                                        $ size, format
+                ,,                      $ proxy config size, format
+                0,Assem10,              $ target config size, format
+                "Input data",           $ Connection Name
+                "",                     $ help string
+                "20 04 24 0A 2C C7 2C [Param4]";    $ Path
+
+
+
+[Capacity]
+        MaxCIPConnections = 6;
+        MaxConsumersPerMcast = 32;
+        TSpec1 = TxRx, 50, 200;
+        TSpec2 = TxRx, 100, 100;
+
+[DLR Class]
+        Revision = 3;
+        Object_Name = "Device Level Ring Object";
+        Object_Class_Code = 0x47;
+        MaxInst = 1;
+        Number_Of_Static_Instances = 1;
+        Max_Number_Of_Dynamic_Instances = 0;
+
+[Ethernet Link Class]
+        Revision = 4;
+        Object_Name = "Ethernet Link Object";
+        Object_Class_Code = 0xF6;
+        MaxInst = 2;
+        Number_Of_Static_Instances = 2;
+        Max_Number_Of_Dynamic_Instances = 0;
+        InterfaceLabel1 = "port1";
+        InterfaceLabel2 = "port2";
+        InterfaceLabel3 = "Device";
+
+
