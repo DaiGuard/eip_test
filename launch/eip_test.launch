@@ -1,12 +1,14 @@
 <launch>
-  <arg name="local_ip" default="192.168.50.50" />
-  <arg name="host" default="192.168.50.5" />
-  <arg name="port" default="3333" />
+  <arg name="local_ip" default="192.168.56.1" />
+  <arg name="host" default="192.168.56.100" />
+  <arg name="port" default="2222" />
+  <arg name="frequency" default="100" />
 
   <node pkg="eip_test" type="eip_test" name="eip_test" output="screen">
     <param name="local_ip" value="$(arg local_ip)" />
     <param name="host" value="$(arg host)" />    
     <param name="port" value="$(arg port)" />    
+    <param name="frequency" value="$(arg frequency)" />    
   </node>
 
 </launch>

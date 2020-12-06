@@ -8,9 +8,14 @@
 #include "odva_ethernetip/socket/udp_socket.h"
 #include "odva_ethernetip/serialization/serializable_buffer.h"
 #include "odva_ethernetip/io_scanner.h"
+#include "odva_ethernetip/cpf_packet.h"
+#include "odva_ethernetip/cpf_item.h"
+#include "odva_ethernetip/sequenced_address_item.h"
+#include "odva_ethernetip/sequenced_data_item.h"
 
 #include "eip_test.h"
 #include "eip_data.h"
+#include "eip_writer.h"
 // #include "eip_scanner.h"
 
 
@@ -21,7 +26,12 @@ using eip::socket::TCPSocket;
 using eip::socket::UDPSocket;
 using eip::serialization::Serializable;
 using eip::serialization::SerializableBuffer;
+using eip::serialization::Reader;
+using eip::serialization::Writer;
 using eip::IOScanner;
+using eip::CPFPacket;
+using eip::CPFItem;
+using eip::SequencedAddressItem;
 
 
 int main(int argc, char** argv)
@@ -38,15 +48,35 @@ int main(int argc, char** argv)
   ros::param::param<double>("~frequency", frequency, 12.856);
   ros::param::param<std::string>("~local_ip", local_ip, "0.0.0.0");
 
-  // ros::Rate loop_rate(frequency);
-  ros::Rate loop_rate(1);
+  ros::Rate loop_rate(frequency);  
 
   boost::asio::io_service io_service;
   shared_ptr<TCPSocket> socket = shared_ptr<TCPSocket>(new TCPSocket(io_service));
   shared_ptr<UDPSocket> io_socket = shared_ptr<UDPSocket>(new UDPSocket(io_service, port, local_ip));
 
-  EIPTest eip(socket, io_socket);
+  EIP_CONNECTION_INFO_T o_to_t;
+  EIP_CONNECTION_INFO_T t_to_o;
 
+  EIP_UDINT seq_num = 1;
+
+  shared_ptr<EIPData> send_data = shared_ptr<EIPData>(new EIPData());
+  EIPData recv_data;  
+  send_data->data.resize(32 / sizeof(EIP_UINT));
+  
+  CPFPacket send_pkt, recv_pkt;
+
+  o_to_t.assembly_id = 150;
+  o_to_t.buffer_size = 38;
+  o_to_t.rpi = 10000000;  
+
+  t_to_o.assembly_id = 100;
+  t_to_o.buffer_size = 34;
+  t_to_o.rpi = 10000000;
+  // t_to_o.assembly_id = 0;
+  // t_to_o.buffer_size = 0;
+  // t_to_o.rpi = 0;
+
+  EIPTest eip(socket, io_socket);
 
   while(ros::ok())
   {
@@ -56,27 +86,61 @@ int main(int argc, char** argv)
     catch(std::runtime_error ex)
     {
       ROS_ERROR("Exception can not open session: %s", ex.what());
-      continue;
+      break;
     }
 
-    shared_ptr<EIPData> send_data = shared_ptr<EIPData>(new EIPData());
-    EIPData recv_data;  
-    send_data->data.resize(32 / sizeof(EIP_UINT));
+    try{
+      eip.createConnection(o_to_t, t_to_o);
+    }
+    catch(std::runtime_error ex)
+    {
+      ROS_ERROR("Exception can not connection: %s", ex.what());
+      break;
+    }
 
     while(ros::ok())
     {
+      ROS_INFO("LOOP");
+            
       try
       {
-        printf("o: ");
-        for(auto it=send_data->data.begin(); it!=send_data->data.end(); ++it)
+        // printf("o: ");
+        // for(auto it=send_data->data.begin(); it!=send_data->data.end(); ++it)
+        // {
+        //   *it += 1;
+        //   printf("%d, ", *it);
+        // }
+        // printf("\n");
+
+        //   // Output Assembly 150(0x96)
+        //   eip.setSingleAttributeSerializable(0x04, 150, 3, send_data);
+
+        shared_ptr<SequencedAddressItem> address = 
+          make_shared<SequencedAddressItem>(eip.getConnection(0).o_to_t_connection_id, seq_num++);
+        shared_ptr<EIPWriter> data = make_shared<EIPWriter>();
+        printf("i: ");
+        for(int i=0; i<sizeof(data->data); i++)
         {
-          *it += 1;
-          printf("%d, ", *it);
+          data->data[i] = seq_num + i;
+          printf("%02x, ", data->data[i]);
         }
         printf("\n");
 
-        // Output Assembly 150(0x96)
-        eip.setSingleAttributeSerializable(0x04, 150, 3, send_data);
+        // send_pkt.getItems().clear();
+        // send_pkt.getItems().push_back(CPFItem(0x8002, address));
+        send_pkt.getItems().push_back(CPFItem(0x8000, address));        
+        send_pkt.getItems().push_back(CPFItem(0x00B1, data));
+
+        eip.sendIOPacket(send_pkt);
+        // recv_pkt = eip.receiveIOPacket();
+
+        // printf("i: ");
+        // for(auto it=recv_pkt.getItems().begin(); it!=recv_pkt.getItems().end(); ++it)
+        // {
+        //   printf("(%d, %d), ", it->getItemType(), it->getLength());
+        // }
+        // printf("\n");
+
       }
       catch(std::runtime_error ex)
       {
@@ -87,14 +151,33 @@ int main(int argc, char** argv)
       try
       {
         // Input Assembly 100(0x64)
-        eip.getSingleAttributeSerializable(0x04, 100, 3, recv_data);      
+        // eip.getSingleAttributeSerializable(0x04, 100, 3, recv_data);
+
+        shared_ptr<SequencedAddressItem> address = 
+          make_shared<SequencedAddressItem>(eip.getConnection(0).t_to_o_connection_id, seq_num);
+
+        // shared_ptr<EIPWriter> data = make_shared<EIPWriter>();
+
+        send_pkt.getItems().clear();
+        send_pkt.getItems().push_back(CPFItem(0x8001, address));
+        // send_pkt.getItems().push_back(CPFItem(0x00B1, data));
+
+        eip.sendIOPacket(send_pkt);
+        recv_pkt = eip.receiveIOPacket();
+
+        // printf("o: ");
+        // for(auto it=recv_pkt.getItems().begin(); it!=recv_pkt.getItems().end(); ++it)
+        // {
+        //   printf("(%d, %d), ", it->getItemType(), it->getLength());
+        // }
+        // printf("\n");
         
-        printf("i: ");
-        for(auto it=recv_data.data.begin(); it!=recv_data.data.end(); ++it)
-        {
-          printf("%d, ", *it);
-        }
-        printf("\n");
+        // printf("i: ");
+        // for(auto it=recv_data.data.begin(); it!=recv_data.data.end(); ++it)
+        // {
+        //   printf("%d, ", *it);
+        // }
+        // printf("\n");
       }
       catch(std::runtime_error ex)
       {
@@ -105,6 +188,7 @@ int main(int argc, char** argv)
       loop_rate.sleep();
     }
 
+    eip.closeConnection(0);
     eip.close();
   }
 }
