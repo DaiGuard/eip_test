@@ -1,6 +1,6 @@
 #include <ros/ros.h>
 #include <boost/shared_ptr.hpp>
-
+#include <console_bridge/console.h>
 #include <sensor_msgs/JointState.h>
 
 #include "odva_ethernetip/socket/tcp_socket.h"
@@ -16,8 +16,11 @@ using boost::system::error_code;
 // using eip::socket::UDPSocket;
 using eip::IOScanner;
 
+
 int main(int argc, char** argv)
 {
+  console_bridge::setLogLevel(console_bridge::LogLevel::CONSOLE_BRIDGE_LOG_DEBUG);
+
   ros::init(argc, argv, "eip_scanner");
   ros::NodeHandle nh;
 

@@ -3,6 +3,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/asio.hpp>
+#include <console_bridge/console.h>
 
 #include "odva_ethernetip/socket/tcp_socket.h"
 #include "odva_ethernetip/socket/udp_socket.h"
@@ -16,6 +17,7 @@
 #include "eip_test.h"
 #include "eip_data.h"
 #include "eip_writer.h"
+#include "eip_reader.h"
 // #include "eip_scanner.h"
 
 
@@ -36,6 +38,8 @@ using eip::SequencedAddressItem;
 
 int main(int argc, char** argv)
 {
+  console_bridge::setLogLevel(console_bridge::LogLevel::CONSOLE_BRIDGE_LOG_DEBUG);
+
   ros::init(argc, argv, "eip_test");
   ros::NodeHandle nh;
 
@@ -64,17 +68,17 @@ int main(int argc, char** argv)
   send_data->data.resize(32 / sizeof(EIP_UINT));
   
   CPFPacket send_pkt, recv_pkt;
+  int connection_num = 0;
 
   o_to_t.assembly_id = 150;
   o_to_t.buffer_size = 38;
-  o_to_t.rpi = 10000000;  
+  // o_to_t.rpi = 10000000;  
+  o_to_t.rpi = 1000000;
 
   t_to_o.assembly_id = 100;
   t_to_o.buffer_size = 34;
-  t_to_o.rpi = 10000000;
-  // t_to_o.assembly_id = 0;
-  // t_to_o.buffer_size = 0;
-  // t_to_o.rpi = 0;
+  // t_to_o.rpi = 10000000;
+  t_to_o.rpi = 1000000;
 
   EIPTest eip(socket, io_socket);
 
@@ -90,7 +94,7 @@ int main(int argc, char** argv)
     }
 
     try{
-      eip.createConnection(o_to_t, t_to_o);
+      connection_num = eip.createConnection(o_to_t, t_to_o);
     }
     catch(std::runtime_error ex)
     {
@@ -113,34 +117,49 @@ int main(int argc, char** argv)
         // printf("\n");
 
         //   // Output Assembly 150(0x96)
-        //   eip.setSingleAttributeSerializable(0x04, 150, 3, send_data);
+        //   eip.setSingleAttributeSerializable(0x04, 150, 3, send_data);        
 
-        shared_ptr<SequencedAddressItem> address = 
-          make_shared<SequencedAddressItem>(eip.getConnection(0).o_to_t_connection_id, seq_num++);
+        // shared_ptr<SequencedAddressItem> address = 
+        //   make_shared<SequencedAddressItem>(connection_num, seq_num++);
+        shared_ptr<SequencedAddressItem> address_o_to_t = 
+          make_shared<SequencedAddressItem>(eip.getConnection(connection_num).o_to_t_connection_id, seq_num++);
         shared_ptr<EIPWriter> data = make_shared<EIPWriter>();
         printf("i: ");
-        for(int i=0; i<sizeof(data->data); i++)
+        data->data[0] = seq_num & 0x00ff;
+        data->data[1] = (seq_num & 0xff00) >> 8;
+        data->data[2] = 1;
+        data->data[3] = 0;
+        data->data[4] = 0;
+        data->data[5] = 0;
+        for(int i=6; i<sizeof(data->data); i++)
         {
           data->data[i] = seq_num + i;
           printf("%02x, ", data->data[i]);
         }
         printf("\n");
 
-        // send_pkt.getItems().clear();
+        send_pkt.getItems().clear();
         // send_pkt.getItems().push_back(CPFItem(0x8002, address));
-        send_pkt.getItems().push_back(CPFItem(0x8000, address));        
+        send_pkt.getItems().push_back(CPFItem(0x8002, address_o_to_t));
         send_pkt.getItems().push_back(CPFItem(0x00B1, data));
+        // send_pkt.getItems().push_back(CPFItem(0x8002, address_t_to_o));                
 
         eip.sendIOPacket(send_pkt);
-        // recv_pkt = eip.receiveIOPacket();
+        recv_pkt = eip.receiveIOPacket();
 
-        // printf("i: ");
-        // for(auto it=recv_pkt.getItems().begin(); it!=recv_pkt.getItems().end(); ++it)
-        // {
-        //   printf("(%d, %d), ", it->getItemType(), it->getLength());
-        // }
-        // printf("\n");
+        SequencedAddressItem address_t_to_o;
+        EIPReader reader;
 
+        recv_pkt.getItems()[0].getDataAs(address_t_to_o);
+        recv_pkt.getItems()[1].getDataAs(reader);
+
+        printf("o: \n");
+        printf("\taddress: %d %d\n\t", address_t_to_o.connection_id, address_t_to_o.sequence_num);
+        for(int i=0; i<reader.getLength(); i++)
+        {
+          printf("%02x, ", reader.data[i]);
+        }
+        printf("\n");
       }
       catch(std::runtime_error ex)
       {
@@ -153,17 +172,17 @@ int main(int argc, char** argv)
         // Input Assembly 100(0x64)
         // eip.getSingleAttributeSerializable(0x04, 100, 3, recv_data);
 
-        shared_ptr<SequencedAddressItem> address = 
-          make_shared<SequencedAddressItem>(eip.getConnection(0).t_to_o_connection_id, seq_num);
+        // shared_ptr<SequencedAddressItem> address = 
+        //   make_shared<SequencedAddressItem>(eip.getConnection(0).t_to_o_connection_id, seq_num);
 
         // shared_ptr<EIPWriter> data = make_shared<EIPWriter>();
 
-        send_pkt.getItems().clear();
-        send_pkt.getItems().push_back(CPFItem(0x8001, address));
+        // send_pkt.getItems().clear();
+        // send_pkt.getItems().push_back(CPFItem(0x8001, address));
         // send_pkt.getItems().push_back(CPFItem(0x00B1, data));
 
-        eip.sendIOPacket(send_pkt);
-        recv_pkt = eip.receiveIOPacket();
+        // eip.sendIOPacket(send_pkt);
+        // recv_pkt = eip.receiveIOPacket();
 
         // printf("o: ");
         // for(auto it=recv_pkt.getItems().begin(); it!=recv_pkt.getItems().end(); ++it)
